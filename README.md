@@ -16,18 +16,25 @@ Structure-based generative models for 3D molecule generation are typically train
 - **Superior OOD robustness** on unseen protein targets (Runs-N-Poses subset)
 - **Lower ligand strain** and fewer steric clashes
 
+## Getting started
 
+UMAFlow training aligns the denoiser to per-atom UMA embeddings. Producing those embeddings is a **standalone preprocessing step** — it has its own environment and runs independently of everything else, so it comes first. The rest is the standard DrugFlow workflow; the DrugFlow and DrugFlow+EMA baselines skip the preprocessing entirely.
 
-## Obtain UMA embeddings
-UMA embeddings are only needed for UMAFlow / REPA training (`configs/training/repa.yml`); the plain DrugFlow and DrugFlow+EMA baselines do not use them.
+1. **[UMA embeddings](#uma-embeddings-preprocessing)** *(UMAFlow only)* — precompute the per-atom REPA targets.
+2. **[Setup](#setup)** — create the conda environment and add the Gnina docking binary.
+3. **[Dataset preparation](#dataset-preparation)** — download the preprocessed CrossDocked dataset and attach the UMA embeddings.
+4. **[Training](#training)** — train UMAFlow, DrugFlow, or DrugFlow+EMA from a config file.
+5. **[Reproducing paper results](#reproducing-paper-results)** — sample from a checkpoint and evaluate the generated molecules.
 
-- **Generate them yourself** with the self-contained pipeline in [`embedding_preparation/`](embedding_preparation/README.md). It uses a separate `uma` conda env and the pinned `fairchem` submodule:
-  ```bash
-  git submodule update --init external/fairchem   # if not cloned with --recurse-submodules
-  ```
-  then follow [`embedding_preparation/README.md`](embedding_preparation/README.md). Its `--output-dir` is what you pass as `PATH_TO_UMA_EMBEDDINGS` below.
+## UMA embeddings (preprocessing)
 
+*UMAFlow only — skip if you are training a DrugFlow baseline.*
 
+A self-contained pipeline in [`embedding_preparation/`](embedding_preparation/README.md) precomputes the per-atom UMA targets for the REPA loss. It uses its own `uma` conda env and the pinned `fairchem` submodule, independent of the main setup below:
+```bash
+git submodule update --init external/fairchem   # if not cloned with --recurse-submodules
+```
+Then follow [`embedding_preparation/README.md`](embedding_preparation/README.md). Its `--output-dir` is what you pass as `PATH_TO_UMA_EMBEDDINGS` when [adding the paths to the dataset](#add-uma-paths-to-the-dataset).
 
 ## Setup
 ### Conda Environment
@@ -46,6 +53,7 @@ chmod +x $CONDA_PREFIX/bin/gnina
 
 ## Dataset preparation
 
+Download the preprocessed CrossDocked dataset (needed for every model). For UMAFlow, then attach the UMA embeddings produced by the [preprocessing step](#uma-embeddings-preprocessing) above; the DrugFlow baselines skip this.
 
 ### Download pre-processed dataset for training and evaluation
 The dataset is based on the CrossDocked set of pocket-ligand complexes, preprocessed.

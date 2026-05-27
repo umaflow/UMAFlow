@@ -1,0 +1,24 @@
+# Conda environment for UMA embedding extraction.
+# Create with:
+#   conda env create -f environment.yml
+#   conda activate uma
+#
+# Then install fairchem-core from the pinned submodule (see README):
+#   pip install -e ../external/fairchem/packages/fairchem-core
+# or directly from upstream pinned at the paper SHA:
+#   pip install "git+https://github.com/facebookresearch/fairchem.git@7ca88cc487349755f2250920d17a843256403080#egg=fairchem-core&subdirectory=packages/fairchem-core"
+
+name: uma
+channels:
+  - conda-forge
+  - pytorch
+dependencies:
+  - python=3.12
+  - pip
+  - rdkit>=2024.03
+  - ase>=3.26
+  - numpy
+  - pytorch>=2.8
+  - pip:
+      - e3nn>=0.5
+      # fairchem-core installed manually — see comment block above.

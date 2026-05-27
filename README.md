@@ -34,8 +34,19 @@ chmod +x $CONDA_PREFIX/bin/gnina
 
 ## Dataset preparation
 
-### Download pre-processed dataset
-The preprocessed dataset is available on Zenodo
+### Obtain UMA embeddings
+UMA embeddings are only needed for UMAFlow / REPA training (`configs/training/repa.yml`); the plain DrugFlow and DrugFlow+EMA baselines do not use them. Two options:
+
+- **Generate them yourself** with the self-contained pipeline in [`embedding_preparation/`](embedding_preparation/README.md). It uses a separate `uma` conda env and the pinned `fairchem` submodule:
+  ```bash
+  git submodule update --init external/fairchem   # if not cloned with --recurse-submodules
+  ```
+  then follow [`embedding_preparation/README.md`](embedding_preparation/README.md). Its `--output-dir` is what you pass as `PATH_TO_UMA_EMBEDDINGS` below.
+
+
+### Download pre-processed dataset for training and evaluation
+The dataset is based on the CrossDocked set of pocket-ligand complexes, preprocessed.
+It is available for download from Zenodo by the original authors of DrugFlow:
 ```bash
 wget https://zenodo.org/records/14919171/files/processed_crossdocked.zip
 unzip processed_crossdocked.zip
@@ -46,7 +57,7 @@ UMA embeddings are stored separately from the main dataset, so we need to add th
 
 ```bash
 PATH_TO_PROCESSED_DATA=...  # e.g. /mnt/datasets/processed_crossdocked
-PATH_TO_UMA_EMBEDDINGS=...  # e.g. /mnt/datasets
+PATH_TO_UMA_EMBEDDINGS=...  # the embeddings --output-dir, e.g. .../embeddings_hydrogens_uma_s_depth_2
 python scripts/python/uma_embeddings/build_uma_complex_id_mapping.py \
   --splits $PATH_TO_PROCESSED_DATA/train.pt $PATH_TO_PROCESSED_DATA/val.pt \
   --embeddings-dir $PATH_TO_UMA_EMBEDDINGS

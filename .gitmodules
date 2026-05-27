@@ -1,0 +1,3 @@
+[submodule "external/fairchem"]
+	path = external/fairchem
+	url = https://github.com/facebookresearch/fairchem.git

@@ -1,0 +1,12 @@
+__pycache__
+.idea
+*.out
+runs/
+notebooks/
+*DS_Store
+samples/
+crossdocked/
+processed_crossdocked/
+outputs/
+experiments/
+checkpoints/

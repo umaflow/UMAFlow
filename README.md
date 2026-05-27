@@ -1,10 +1,6 @@
 # Physics-Aligned 3D Molecule Generation in Protein Pockets
 
-> Official code repository for **"Physics-Aligned 3D Molecule Generation in Protein Pockets"**.
-
-This repository will contain the implementation of a representation alignment (REPA) scheme that grounds pocket-conditioned 3D molecule generative models in atomic-level physics by aligning intermediate denoiser features with those of a frozen, pretrained machine-learned interatomic potential (MLIP).
-
----
+> Official code for the paper **"Physics-Aligned 3D Molecule Generation in Protein Pockets"**.
 
 ## Overview
 

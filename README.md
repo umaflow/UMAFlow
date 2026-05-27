@@ -16,8 +16,20 @@ Structure-based generative models for 3D molecule generation are typically train
 - **Superior OOD robustness** on unseen protein targets (Runs-N-Poses subset)
 - **Lower ligand strain** and fewer steric clashes
 
-## Setup
 
+
+## Obtain UMA embeddings
+UMA embeddings are only needed for UMAFlow / REPA training (`configs/training/repa.yml`); the plain DrugFlow and DrugFlow+EMA baselines do not use them.
+
+- **Generate them yourself** with the self-contained pipeline in [`embedding_preparation/`](embedding_preparation/README.md). It uses a separate `uma` conda env and the pinned `fairchem` submodule:
+  ```bash
+  git submodule update --init external/fairchem   # if not cloned with --recurse-submodules
+  ```
+  then follow [`embedding_preparation/README.md`](embedding_preparation/README.md). Its `--output-dir` is what you pass as `PATH_TO_UMA_EMBEDDINGS` below.
+
+
+
+## Setup
 ### Conda Environment
 
 Create a conda/mamba environment 
@@ -33,15 +45,6 @@ chmod +x $CONDA_PREFIX/bin/gnina
 ```
 
 ## Dataset preparation
-
-### Obtain UMA embeddings
-UMA embeddings are only needed for UMAFlow / REPA training (`configs/training/repa.yml`); the plain DrugFlow and DrugFlow+EMA baselines do not use them. Two options:
-
-- **Generate them yourself** with the self-contained pipeline in [`embedding_preparation/`](embedding_preparation/README.md). It uses a separate `uma` conda env and the pinned `fairchem` submodule:
-  ```bash
-  git submodule update --init external/fairchem   # if not cloned with --recurse-submodules
-  ```
-  then follow [`embedding_preparation/README.md`](embedding_preparation/README.md). Its `--output-dir` is what you pass as `PATH_TO_UMA_EMBEDDINGS` below.
 
 
 ### Download pre-processed dataset for training and evaluation

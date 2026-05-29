@@ -101,12 +101,9 @@ To launch the training job for the DrugFlow base model, for example, run
 python src/train.py --config $CONFIG
 ```
 
-## Reproducing paper results
-- training scripts
-- evaluation and analysis scripts to reproduce all results from the paper.
-
+## Inference and evaluation
 ### Checkpoints 
-> *Placeholder — to do, provide links to pretrained checkpoints on Zenodo or elsewhere.*
+> *Placeholder — to do, will provide links to pretrained checkpoints on Zenodo or elsewhere.*
 ```bash
 # UMAFlow model
 todo
@@ -117,9 +114,6 @@ todo
 # Baseline DrugFlow + EMA
 todo
 ```
-
-### Samples
-> *Placeholder — to do, provide links to sampled datasets on Zenodo or elsewhere.*
 
 
 ### Sampling for all proteins in the test set
@@ -162,9 +156,13 @@ python scripts/python/postprocess_metrics.py \
 
 Per-sample evaluation results will be stored in ```EVALUATED_DATA/metrics_detailed.csv``` and aggregated metrics will be stored in ```EVALUATED_DATA/metrics_aggregated.csv```.
 
+### Samples
+> *Placeholder — to do, will provide links to samples by all our trained models on Zenodo or elsewhere.*
+
+
 
 ## OOD evaluation on Runs-N-Poses 
-> *Placeholder — to do, provide instructions for reproducing the OOD evaluation on the Runs-N-Poses subset, including links to the subset and any necessary checkpoints or sampled datasets.*
+> *Placeholder — to do, will provide instructions for reproducing the OOD evaluation on the Runs-N-Poses subset, including links to the subset and any necessary checkpoints or sampled datasets.*
 Dataset: **Runs-N-Poses** (hardest subset) — 95 targets reduced to 68 after removing redundant pockets and ion-containing complexes. Used for out-of-distribution evaluation.
 
 

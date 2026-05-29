@@ -14,7 +14,9 @@ Structure-based generative models for 3D molecule generation are typically train
 
 ## Getting started
 
-UMAFlow training aligns the denoiser to per-atom UMA embeddings. Producing those embeddings is a **standalone preprocessing step** — it has its own environment and runs independently of everything else, so it comes first. The rest is the standard DrugFlow workflow; the DrugFlow and DrugFlow+EMA baselines skip the preprocessing entirely.
+UMAFlow training aligns the denoiser DrugFlow to per-atom UMA embeddings.
+Producing those embeddings is a **standalone preprocessing step** — it has its own environment and runs independently of everything else.
+The rest is the standard DrugFlow workflow; the DrugFlow and DrugFlow+EMA baselines skip the preprocessing entirely.
 
 1. **[UMA embeddings](#uma-embeddings-preprocessing)** *(UMAFlow only)* — precompute the per-atom REPA targets.
 2. **[Setup](#setup)** — create the conda environment and add the Gnina docking binary.
